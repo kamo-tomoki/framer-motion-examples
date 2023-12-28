@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 type Props = {
   title: string;
   show: boolean;
-  scale: number;
 };
-const Title: React.FC<Props> = ({ title, show, scale }) => {
+const Title: React.FC<Props> = ({ title, show }) => {
   const x = 30;
   const y = x;
   const getMotionValue = (latest) => {
