@@ -16,10 +16,13 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "@popmotion/popcorn": "^0.4.4",
     "framer-motion": "^10.16.16",
     "next": "14.0.4",
+    "popmotion": "^11.0.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.2",
@@ -34,6 +37,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-syntax-highlighter": "^15.5.11",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",

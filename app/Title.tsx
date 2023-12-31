@@ -1,4 +1,4 @@
-import { openSpring, closeSpring } from "./animation";
+import { openSpring, closeSpring } from "./utils/animation";
 import { motion } from "framer-motion";
 type Props = {
   title: string;

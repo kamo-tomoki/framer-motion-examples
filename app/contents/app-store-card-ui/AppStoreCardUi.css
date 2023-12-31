@@ -1,0 +1,70 @@
+.appstore-card-ui-bg {
+  height: 410px;
+  color: #d2c;
+  background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
+}
+
+.appstore-card {
+  position: relative;
+  padding: 25px;
+  height: 180px;
+  flex: 0 0 40%;
+  max-width: 40%;
+}
+
+.appstore-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.appstore-card-content {
+  pointer-events: auto;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  overflow: hidden;
+  width: 100%;
+  /* height: 100%; */
+  height: 180px;
+  margin: 0 auto;
+  margin-top: 110px;
+}
+
+.appstore-card-open .appstore-card-content {
+  height: 180px;
+  max-width: 700px;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+.appstore-card-content-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+}
+
+.appstore-card-content-container.appstore-card-open {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 1;
+  overflow: hidden;
+  padding: 40px 0;
+}
+
+.appstore-card-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.appstore-card-content span {
+  font-size: 18px;
+}
