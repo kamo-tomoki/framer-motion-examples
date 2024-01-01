@@ -4,13 +4,14 @@ import { LayoutGroup } from "framer-motion";
 import { useEffect, useState } from "react";
 import SelectBox from "./contents/select-box/SelectBox";
 import AppStoreCard from "./contents/app-store-card-ui/AppStoreCardUi";
+import DynamicIslandStyle from "./contents/dynamic-island-style/DynamicIslandStyle";
 import sampleCode from "./contents/select-box/code/sample-code";
 
 const Samples = () => {
   return (
     <div className="container p-12">
       <div className="body-container">
-        <h1 className="font-bold text-4xl mb-5">Pick up</h1>
+        <h1 className="font-bold text-4xl mb-5 pl-6">Pick up</h1>
         <ul className="card-list">
           <LayoutGroup>
             <Card
@@ -21,6 +22,11 @@ const Samples = () => {
             <Card
               title="App Store Card"
               Content={AppStoreCard}
+              sampleCode={sampleCode}
+            ></Card>
+            <Card
+              title="Dynamic Island Style"
+              Content={DynamicIslandStyle}
               sampleCode={sampleCode}
             ></Card>
           </LayoutGroup>

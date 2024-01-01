@@ -1,0 +1,15 @@
+.island {
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+.island-open {
+  width: 300px;
+}
+
+.island-close {
+  width: 1px;
+  height: 1px;
+}

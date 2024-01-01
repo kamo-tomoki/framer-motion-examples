@@ -94,7 +94,7 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
           initial={{ scale: 1 }}
           animate={{ scale: scaleVal }}
           transition={show ? openSpring : closeSpring}
-          layout="position"
+          layout="preserve-aspect"
           style={{
             zIndex,
             y,
