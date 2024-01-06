@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   flex: 1 1 100%;
-  max-width: 100%;
+  max-width: 1200px;
 }
 
 header {
@@ -43,6 +48,7 @@ header span {
   background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
   height: 410px;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
 }

@@ -1,7 +1,7 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./HighlightedCode.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Tabs, Tab } from "@nextui-org/react";
 import ReactIcon from "../icons/ReactIcon";
 import CssIcon from "../icons/CssIcon";

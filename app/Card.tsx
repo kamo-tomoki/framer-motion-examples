@@ -13,6 +13,7 @@ import { useScrollConstraints } from "./utils/use-scroll-contents";
 import { useWheelScroll } from "./utils/use-wheel-scroll";
 import HighlightedCode from "./contents/HighlightedCode";
 import "./Card.css";
+import timer from "./utils/timer";
 
 type Props = {
   Content: React.FC<{
@@ -27,9 +28,10 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
   const [scaleVal, setScaleVal] = useState(1);
   const [hover, setHover] = useState(false);
   const [slow, setSlow] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
   const zIndex = useMotionValue(0);
-  // const y = useMotionValue(0);
-  const y = useSpring(0, { stiffness: 700, damping: 50 });
+  const y = useSpring(0, { stiffness: 1400, damping: 90 });
 
   const cardRef = useRef<HTMLDivElement>(null);
   const constraints = useScrollConstraints(cardRef, show);
@@ -55,6 +57,14 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
     } else if (!show && !hover && latest.scale == 1.05) {
       setScaleVal(1);
     }
+  };
+
+  const handleClick = async () => {
+    y.set(0);
+    if (y.get() < -100) {
+      await timer(300);
+    }
+    setShow(false);
   };
 
   const onClickCard = (e: MouseEvent<HTMLInputElement>) => {
@@ -86,7 +96,7 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
       <Overlay show={show} setShow={setShow} />
       <div
         className={`card-content-container ${show && "open"}`}
-        onClick={() => setShow(false)}
+        onClick={handleClick}
       >
         <motion.div
           ref={cardRef}
@@ -99,12 +109,13 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
             zIndex,
             y,
           }}
-          drag={show ? "y" : false}
+          drag={show && !isDragging ? "y" : false}
           dragConstraints={constraints}
-          // whileHover={show ? { scale: 1 } : { scale: 1.05 }}
           onDrag={checkSwipeToDismiss}
           onClick={onClickCard}
           onUpdate={checkZIndex}
+          onMouseDown={() => setIsDragging(true)}
+          onMouseUp={() => setIsDragging(false)}
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
         >

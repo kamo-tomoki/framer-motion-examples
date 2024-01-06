@@ -1,5 +1,6 @@
 .code-container {
   background-color: rgb(30, 30, 30);
+  user-select: text;
 }
 
 .code-selector {

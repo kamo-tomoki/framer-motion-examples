@@ -35,7 +35,7 @@ const SelectBox: React.FC<Props> = ({ show }) => {
           onClick={() => show && setIsOpen(!isOpen)}
           style={{ cursor: show ? "pointer" : "default" }}
         >
-          SelectBox
+          Select
           <motion.div
             variants={{
               open: { rotate: 180 },

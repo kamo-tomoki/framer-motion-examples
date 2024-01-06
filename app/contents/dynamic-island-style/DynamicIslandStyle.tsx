@@ -1,77 +1,106 @@
-import { motion, useMotionValue } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./DynamicIslandStyle.css";
+import timer from "@/app/utils/timer";
+import Switch from "./Switch";
 
 type Props = {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type AnimationState = "start-open" | "open" | "start-close" | "close";
+export type IslandState =
+  | "start-open"
+  | "open"
+  | "remove-text"
+  | "start-close"
+  | "close"
+  | "hide"
+  | "disabled";
 
-const DynamicIslandStyle: React.FC<Props> = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [animation, setAnimation] = useState<AnimationState>("open");
-
-  const handleClick = async () => {
-    if (isOpen) {
-      setAnimation("start-close");
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 700);
-      });
-      setAnimation("close");
-      setIsOpen(!isOpen);
-    } else {
-      setAnimation("start-open");
-      setIsOpen(!isOpen);
-      await new Promise<void>((resolve) => {
-        setTimeout(() => {
-          resolve();
-        }, 700);
-      });
-      setAnimation("open");
-    }
-  };
+const DynamicIslandStyle: React.FC<Props> = ({ show }) => {
+  const [isOn, setIsOn] = useState(false);
+  const [island, setIsland] = useState<IslandState>("open");
 
   useEffect(() => {
-    console.log(animation);
-  }, [animation]);
+    if (show) {
+      setIsland("open");
+      setIsOn(true);
+    } else {
+      setIsland("disabled");
+    }
+  }, [show]);
+
+  const handleClick = async () => {
+    /* if (!show) return;
+    if (isOn) {
+      setIsland("remove-text");
+      await timer(200);
+      setIsland("start-close");
+      await timer(600);
+      setIsland("close");
+      setIsOn(!isOn);
+    } else {
+      setIsland("start-open");
+      setIsOn(!isOn);
+      await timer(400);
+      setIsland("open");
+    } */
+  };
 
   return (
     <div className="content-wrapper" onClick={handleClick}>
-      <div className="h-56 bg-slate-300" />
-      <div className="flex justify-center">
-        <motion.div
-          className={`island ${"island-" + animation}`}
-          layout
-          initial={{ borderRadius: 50 }}
-          animate={isOpen ? "open" : "closed"}
-          variants={{
-            open: {
-              //   clipPath: "inset(0% 0% 0% 0% round 30px)",
-              y: -100,
-              transition: {
-                type: "spring",
-                bounce: 0,
-                duration: 0.7,
-              },
+      <motion.div
+        className={`bg-white island ${"island-" + island}`}
+        layout
+        initial={{ borderRadius: 50 }}
+        animate={isOn ? "up" : "reset"}
+        variants={{
+          up: {
+            y: -100,
+            transition: {
+              type: "spring",
+              bounce: 0,
+              duration: 0.5,
             },
-            closed: {
-              //   clipPath: "inset(10% 50% 90% 50% round 10px)",
-              y: 0,
-              transition: {
-                type: "spring",
-                bounce: 0,
-                duration: 0.3,
-              },
+          },
+          reset: {
+            y: 0,
+            transition: {
+              type: "spring",
+              bounce: 0,
+              duration: 0.3,
             },
+          },
+        }}
+      >
+        <motion.h1
+          className="text-xl pl-5 pt-[5.5px] font-bold"
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: island === "open" || island === "disabled" ? 1 : 0,
           }}
+          layout="position"
         >
-          {/* <h1 className="text-2xl">test</h1> */}
-        </motion.div>
-      </div>
+          Hello
+        </motion.h1>
+      </motion.div>
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Switch
+              show={show}
+              isOn={isOn}
+              setIsOn={setIsOn}
+              setIsland={setIsland}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
