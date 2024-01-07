@@ -16,21 +16,22 @@ header {
   display: flex;
   justify-content: center;
   position: sticky;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(70px);
+  -webkit-backdrop-filter: blur(70px);
+  z-index: 1;
 }
 
 header div {
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   width: 95%;
   height: 80px;
-  /* border: 0.5px solid rgba(0, 0, 0, 0.5); */
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2); */
   border-radius: 30px;
-  padding: 15px;
-  z-index: 1;
+  padding: 20px 15px;
 }
 
 header span {

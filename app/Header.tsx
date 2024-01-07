@@ -1,4 +1,3 @@
-import { Navbar, NavbarBrand } from "@nextui-org/react";
 const Header = () => {
   return (
     <header>
