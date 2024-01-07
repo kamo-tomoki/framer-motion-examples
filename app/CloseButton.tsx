@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 
 const CloseButton: React.FC<{
   show: boolean;
-  setShow: React.Dispatch<SetStateAction<boolean>>;
-}> = ({ show, setShow }) => {
+  closeCard: () => Promise<void>;
+}> = ({ show, closeCard }) => {
   const [hover, setHover] = useState(false);
   return (
     <button
       className="close-btn"
-      onClick={() => show && setShow(false)}
+      onClick={() => show && closeCard()}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

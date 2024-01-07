@@ -36,7 +36,7 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const constraints = useScrollConstraints(cardRef, show);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLLIElement>(null);
   const dismissDistance = 80;
   const checkSwipeToDismiss = () => {
     if (y.get() > dismissDistance) setShow(false);
@@ -59,7 +59,7 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
     }
   };
 
-  const handleClick = async () => {
+  const closeCard = async () => {
     y.set(0);
     if (y.get() < -100) {
       await timer(300);
@@ -92,11 +92,11 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
   }, [show]);
 
   return (
-    <div className="card" ref={containerRef}>
+    <li className="card" ref={containerRef}>
       <Overlay show={show} setShow={setShow} />
       <div
         className={`card-content-container ${show && "open"}`}
-        onClick={handleClick}
+        onClick={closeCard}
       >
         <motion.div
           ref={cardRef}
@@ -120,12 +120,12 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
           onMouseLeave={handleOnMouseLeave}
         >
           <Title title={title} show={show} />
-          {show && <CloseButton show={show} setShow={setShow} />}
+          {show && <CloseButton show={show} closeCard={closeCard} />}
           <Content show={show} setShow={setShow} />
           <HighlightedCode sampleCode={sampleCode} />
         </motion.div>
       </div>
-    </div>
+    </li>
   );
 };
 
