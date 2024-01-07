@@ -11,14 +11,12 @@ type Props = {
 const AppStoreCard: React.FC<Props> = ({ show, setShow }) => {
   return (
     <div className="appstore-card-ui-bg">
-      <>
-        <ul className="appstore-card-list">
-          <LayoutGroup>
-            <Card parentShow={show} setParentShow={setShow} />
-            <Card parentShow={show} setParentShow={setShow} />
-          </LayoutGroup>
-        </ul>
-      </>
+      <ul className="appstore-card-list">
+        <LayoutGroup>
+          <Card parentShow={show} setParentShow={setShow} />
+          <Card parentShow={show} setParentShow={setShow} />
+        </LayoutGroup>
+      </ul>
     </div>
   );
 };
