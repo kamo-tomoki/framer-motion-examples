@@ -9,9 +9,9 @@ const CloseIcon: React.FC = () => {
       <path
         d="M15 5L5 15M5 5l5.03 5.03L15 15"
         fill="transparent"
-        stroke-width="2"
+        strokeWidth="2"
         stroke="currentColor"
-        stroke-linecap="round"
+        strokeLinecap="round"
       ></path>
     </svg>
   );
