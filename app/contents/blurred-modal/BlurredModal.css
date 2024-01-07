@@ -1,0 +1,32 @@
+.blurred-modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 410px;
+}
+
+.blurred-modal {
+  background-color: white;
+  border-radius: 20px;
+  position: absolute;
+  width: 40%;
+  height: 250px;
+}
+
+.blurred-modal-disabled {
+  height: 50%;
+  margin-top: 1rem;
+}
+
+.no-blur {
+  backdrop-filter: blur(0px) !important;
+}
+
+.close-icon-container {
+  background-color: rgba(230, 190, 226, 0.4);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-icon-container:hover {
+  background-color: rgba(230, 190, 226, 0.8);
+}

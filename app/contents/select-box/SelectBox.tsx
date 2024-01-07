@@ -16,7 +16,7 @@ type Props = {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SelectBox: React.FC<Props> = ({ show, setShow }) => {
+const SelectBox: React.FC<Props> = ({ show }) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     if (!show) {
@@ -24,7 +24,7 @@ const SelectBox: React.FC<Props> = ({ show, setShow }) => {
     }
   }, [show]);
   return (
-    <div className="menu-container">
+    <div className="selectbox-container">
       <motion.nav
         initial={false}
         animate={isOpen ? "open" : "closed"}
@@ -35,7 +35,7 @@ const SelectBox: React.FC<Props> = ({ show, setShow }) => {
           onClick={() => show && setIsOpen(!isOpen)}
           style={{ cursor: show ? "pointer" : "default" }}
         >
-          SelectBox
+          Select
           <motion.div
             variants={{
               open: { rotate: 180 },

@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   flex: 1 1 100%;
-  max-width: 100%;
+  max-width: 990px;
 }
 
 header {
@@ -30,98 +35,20 @@ header div {
 
 header span {
   color: #d2c;
+  font-size: 1.5rem;
   background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.overlay {
-  z-index: 1;
-  position: fixed;
-  background: rgba(0, 0, 0, 0.5);
-  will-change: opacity;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-}
-
-.card {
-  position: relative;
-  padding: 25px;
-  height: 460px;
-  flex: 0 0 40%;
-  max-width: 40%;
-}
-
-.card-list {
+.content-wrapper {
+  height: 100%;
+  color: #d2c;
+  background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
+  height: 410px;
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-}
-
-.card-content {
-  pointer-events: auto;
-  position: relative;
-  border-radius: 20px;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.5);
-  background-color: white;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-}
-
-.open .card-content {
-  height: auto;
-  max-width: 900px;
-  overflow: hidden;
-}
-
-.card-content-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: block;
-}
-
-.card-content-container.open {
-  top: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  z-index: 1;
-  overflow: hidden;
-  padding: 40px 0;
-}
-
-.card-title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.close-btn {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
-  border: 1px solid transparent;
-  /* color: white; */
-  border-radius: 100%;
-}
-
-.item {
-  width: 56%;
-  overflow: visible;
-  stroke: #fff;
-  stroke-width: 2;
-  stroke-linejoin: round;
-  stroke-linecap: round;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }

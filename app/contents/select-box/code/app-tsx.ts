@@ -1,70 +1,45 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
+const code = `import {
+  LayoutGroup,
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+} from "framer-motion";
 import React, {
   MouseEvent,
   SetStateAction,
+  use,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import Title from "./Title";
-import { openSpring, closeSpring } from "./utils/animation";
+import { openSpring, closeSpring } from "./animation";
 import CloseButton from "./CloseButton";
-import { useScrollConstraints } from "./utils/use-scroll-contents";
-import { useWheelScroll } from "./utils/use-wheel-scroll";
-import HighlightedCode from "./contents/HighlightedCode";
-import "./Card.css";
-import timer from "./utils/timer";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import code from "./contents/select-box/code";
 
 type Props = {
-  Content: React.FC<{
+  SelectBox: React.FC<{
     show: boolean;
     setShow: React.Dispatch<SetStateAction<boolean>>;
   }>;
-  sampleCode: { [key: string]: string };
   title: string;
 };
-const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
+const Card: React.FC<Props> = ({ SelectBox, title }) => {
   const [show, setShow] = useState(false);
   const [scaleVal, setScaleVal] = useState(1);
   const [hover, setHover] = useState(false);
-  const [slow, setSlow] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
   const zIndex = useMotionValue(0);
-  const y = useSpring(0, { stiffness: 1400, damping: 90 });
-
-  const cardRef = useRef<HTMLDivElement>(null);
-  const constraints = useScrollConstraints(cardRef, show);
-
-  const containerRef = useRef<HTMLLIElement>(null);
-  const dismissDistance = 80;
-  const checkSwipeToDismiss = () => {
-    if (y.get() > dismissDistance) setShow(false);
-  };
-  useWheelScroll(
-    containerRef,
-    y,
-    constraints,
-    checkSwipeToDismiss,
-    show,
-    setSlow
-  );
+  const y = useMotionValue(0);
 
   const checkZIndex = (latest: { scale: number }) => {
+    console.log(latest);
     if (show) {
       setScaleVal(1);
       zIndex.set(2);
     } else if (!show && !hover && latest.scale == 1.05) {
       setScaleVal(1);
     }
-  };
-
-  const closeCard = async () => {
-    y.set(0);
-    if (y.get() < -100) {
-      await timer(300);
-    }
-    setShow(false);
   };
 
   const onClickCard = (e: MouseEvent<HTMLInputElement>) => {
@@ -92,40 +67,38 @@ const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
   }, [show]);
 
   return (
-    <li className="card" ref={containerRef}>
+    <div className="card">
       <Overlay show={show} setShow={setShow} />
       <div
-        className={`card-content-container ${show && "open"}`}
-        onClick={closeCard}
+        className={}
+        onClick={() => setShow(false)}
       >
         <motion.div
-          ref={cardRef}
           className="card-content"
           initial={{ scale: 1 }}
           animate={{ scale: scaleVal }}
           transition={show ? openSpring : closeSpring}
-          layout="preserve-aspect"
+          layout="position"
           style={{
             zIndex,
             y,
           }}
-          drag={show && !isDragging ? "y" : false}
-          dragConstraints={constraints}
-          onDrag={checkSwipeToDismiss}
+          drag={show ? "y" : false}
+          // whileHover={show ? { scale: 1 } : { scale: 1.05 }}
           onClick={onClickCard}
           onUpdate={checkZIndex}
-          onMouseDown={() => setIsDragging(true)}
-          onMouseUp={() => setIsDragging(false)}
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
         >
           <Title title={title} show={show} />
-          {show && <CloseButton show={show} closeCard={closeCard} />}
-          <Content show={show} setShow={setShow} />
-          <HighlightedCode sampleCode={sampleCode} />
+          {show && <CloseButton show={show} setShow={setShow} />}
+          <SelectBox show={show} setShow={setShow} />
+          <SyntaxHighlighter language="javascript" style={a11yDark}>
+            {code}
+          </SyntaxHighlighter>
         </motion.div>
       </div>
-    </li>
+    </div>
   );
 };
 
@@ -145,4 +118,5 @@ const Overlay: React.FC<{
   );
 };
 
-export default Card;
+export default Card;`;
+export default code;

@@ -1,0 +1,21 @@
+.code-container {
+  background-color: rgb(30, 30, 30);
+  user-select: text;
+}
+
+.code-selector {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  border-radius: 10px;
+  border: 1px solid white;
+  backdrop-filter: blur(30px);
+}
+
+.code-selector-item {
+  color: white;
+}
+
+span {
+  font-size: 16px;
+}

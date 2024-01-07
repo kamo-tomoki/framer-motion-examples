@@ -1,0 +1,30 @@
+.island {
+  position: absolute;
+}
+
+.island-start-open,
+.island-start-close {
+  width: 40px;
+  height: 40px;
+}
+
+.island-open,
+.island-remove-text,
+.island-disabled {
+  width: 300px;
+  height: 40px;
+}
+
+.island-disabled {
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.island-close {
+  width: 1px;
+  height: 1px;
+}
+
+.island-hide {
+  width: 0px;
+  height: 0px;
+}
