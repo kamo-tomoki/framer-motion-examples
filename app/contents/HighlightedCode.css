@@ -3,6 +3,16 @@
   user-select: text;
 }
 
+.code-header {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .code-selector {
   display: flex;
   justify-content: space-between;
