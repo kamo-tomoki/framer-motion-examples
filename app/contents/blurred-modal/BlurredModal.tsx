@@ -31,9 +31,19 @@ const BlurredModal: React.FC<Props> = ({ show }) => {
             <motion.div
               layout
               className={`blurred-modal-overlay ${!show && "no-blur"}`}
-              initial={{ backdropFilter: "blur(0px)", zIndex: 3 }}
-              animate={{ backdropFilter: "blur(10px)" }}
-              exit={{ backdropFilter: "blur(0px)" }}
+              initial={{
+                backdropFilter: "blur(0px)",
+                WebkitBackdropFilter: "blur(0px)",
+                zIndex: 3,
+              }}
+              animate={{
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+              }}
+              exit={{
+                backdropFilter: "blur(0px)",
+                WebkitBackdropFilter: "blur(10px)",
+              }}
               onClick={() => setIsOpen(false)}
             ></motion.div>
             <motion.div

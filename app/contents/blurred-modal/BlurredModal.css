@@ -19,6 +19,7 @@
 
 .no-blur {
   backdrop-filter: blur(0px) !important;
+  -webkit-backdrop-filter: blur(0px) !important;
 }
 
 .close-icon-container {
@@ -29,4 +30,10 @@
 
 .close-icon-container:hover {
   background-color: rgba(230, 190, 226, 0.8);
+}
+
+@media only screen and (max-width: 650px) {
+  .blurred-modal-overlay {
+    height: 360px;
+  }
 }
