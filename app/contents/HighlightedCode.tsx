@@ -14,7 +14,12 @@ const HighlightedCode: React.FC<Props> = ({ sampleCode }) => {
 
   return (
     <div className="code-container">
-      <Tabs className="dark" onSelectionChange={setActiveTab}>
+      <Tabs
+        className="dark"
+        onSelectionChange={(key) => {
+          typeof key === "string" && setActiveTab(key);
+        }}
+      >
         {Object.keys(sampleCode).map((key) => (
           <Tab
             key={key}
