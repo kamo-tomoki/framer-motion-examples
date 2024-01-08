@@ -1,5 +1,11 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useSpring,
+} from "framer-motion";
 import React, {
+  memo,
   MouseEvent,
   SetStateAction,
   useEffect,
@@ -16,118 +22,154 @@ import "./Card.css";
 import timer from "./utils/timer";
 
 type Props = {
+  id: number;
   Content: React.FC<{
     show: boolean;
     setShow: React.Dispatch<SetStateAction<boolean>>;
   }>;
   sampleCode: { [key: string]: string };
   title: string;
+  sm: boolean;
+  activeTab: string;
+  setActiveTab: React.Dispatch<SetStateAction<string>>;
+  setSelectedCard: React.Dispatch<SetStateAction<number | null>>;
+  setStickyCodeHeader: React.Dispatch<SetStateAction<boolean>>;
 };
-const Card: React.FC<Props> = ({ Content, sampleCode, title }) => {
-  const [show, setShow] = useState(false);
-  const [scaleVal, setScaleVal] = useState(1);
-  const [hover, setHover] = useState(false);
-  const [slow, setSlow] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
 
-  const zIndex = useMotionValue(0);
-  const y = useSpring(0, { stiffness: 1400, damping: 90 });
+// eslint-disable-next-line react/display-name
+const Card = memo(
+  ({
+    id,
+    Content,
+    sampleCode,
+    title,
+    sm,
+    activeTab,
+    setActiveTab,
+    setSelectedCard,
+    setStickyCodeHeader,
+  }: Props) => {
+    const [show, setShow] = useState(false);
+    const [scaleVal, setScaleVal] = useState(1);
+    const [hover, setHover] = useState(false);
+    const [slow, setSlow] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
-  const cardRef = useRef<HTMLDivElement>(null);
-  const constraints = useScrollConstraints(cardRef, show);
+    const zIndex = useMotionValue(0);
+    const y = useSpring(0, { stiffness: 1400, damping: 90 });
 
-  const containerRef = useRef<HTMLLIElement>(null);
-  const dismissDistance = 80;
-  const checkSwipeToDismiss = () => {
-    if (y.get() > dismissDistance) setShow(false);
-  };
-  useWheelScroll(
-    containerRef,
-    y,
-    constraints,
-    checkSwipeToDismiss,
-    show,
-    setSlow
-  );
+    const cardRef = useRef<HTMLDivElement>(null);
+    const constraints = useScrollConstraints(cardRef, show);
 
-  const checkZIndex = (latest: { scale: number }) => {
-    if (show) {
-      setScaleVal(1);
-      zIndex.set(2);
-    } else if (!show && !hover && latest.scale == 1.05) {
-      setScaleVal(1);
-    }
-  };
+    const containerRef = useRef<HTMLLIElement>(null);
+    const dismissDistance = 80;
+    const checkSwipeToDismiss = () => {
+      if (y.get() > dismissDistance) setShow(false);
+    };
+    useWheelScroll(
+      containerRef,
+      y,
+      constraints,
+      checkSwipeToDismiss,
+      show,
+      setSlow
+    );
 
-  const closeCard = async () => {
-    y.set(0);
-    if (y.get() < -100) {
-      await timer(300);
-    }
-    setShow(false);
-  };
+    const checkZIndex = (latest: { scale: number }) => {
+      if (show) {
+        setScaleVal(1);
+        zIndex.set(2);
+        return;
+      } else if (!show && !hover && latest.scale == 1.05) {
+        setScaleVal(1);
+      }
+    };
 
-  const onClickCard = (e: MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-    !show && setShow(true);
-  };
+    useMotionValueEvent(y, "change", (latest: number) => {
+      // console.log(latest);
+      if (sm) {
+        latest <= -360 ? setStickyCodeHeader(true) : setStickyCodeHeader(false);
+      } else {
+        latest <= -450 ? setStickyCodeHeader(true) : setStickyCodeHeader(false);
+      }
+    });
 
-  const handleOnMouseEnter = () => {
-    setHover(true);
-    !show && setScaleVal(1.05);
-  };
+    const closeCard = async () => {
+      y.set(0);
+      if (y.get() < -100) {
+        await timer(300);
+      }
+      setShow(false);
+    };
 
-  const handleOnMouseLeave = () => {
-    setHover(false);
-    !show && setScaleVal(1);
-  };
+    const onClickCard = (e: MouseEvent<HTMLInputElement>) => {
+      e.stopPropagation();
+      !show && setShow(true);
+    };
 
-  useEffect(() => {
-    if (show) {
-      zIndex.set(2);
+    const handleOnMouseEnter = () => {
+      setHover(true);
+      !show && setScaleVal(1.05);
+    };
+
+    const handleOnMouseLeave = () => {
       setHover(false);
-    } else {
-      zIndex.set(0);
-    }
-  }, [show]);
+      !show && setScaleVal(1);
+    };
 
-  return (
-    <li className="card" ref={containerRef}>
-      <Overlay show={show} setShow={setShow} />
-      <div
-        className={`card-content-container ${show && "open"}`}
-        onClick={closeCard}
-      >
-        <motion.div
-          ref={cardRef}
-          className="card-content"
-          initial={{ scale: 1 }}
-          animate={{ scale: scaleVal }}
-          transition={show ? openSpring : closeSpring}
-          layout="preserve-aspect"
-          style={{
-            zIndex,
-            y,
-          }}
-          drag={show && !isDragging ? "y" : false}
-          dragConstraints={constraints}
-          onDrag={checkSwipeToDismiss}
-          onClick={onClickCard}
-          onUpdate={checkZIndex}
-          onMouseDown={() => setIsDragging(true)}
-          onMouseUp={() => setIsDragging(false)}
-          onMouseEnter={handleOnMouseEnter}
-          onMouseLeave={handleOnMouseLeave}
+    useEffect(() => {
+      if (show) {
+        zIndex.set(2);
+        setHover(false);
+        setSelectedCard(id);
+      } else {
+        zIndex.set(0);
+        setSelectedCard(null);
+      }
+    }, [show]);
+
+    return (
+      <li className="card" ref={containerRef}>
+        <Overlay show={show} setShow={setShow} />
+        <div
+          className={`card-content-container ${show && "open"}`}
+          onClick={closeCard}
         >
-          <Title title={title} show={show} />
-          {show && <CloseButton show={show} closeCard={closeCard} />}
-          <Content show={show} setShow={setShow} />
-          <HighlightedCode sampleCode={sampleCode} />
-        </motion.div>
-      </div>
-    </li>
-  );
-};
+          <motion.div
+            ref={cardRef}
+            className="card-content"
+            initial={{ scale: 1 }}
+            animate={{ scale: scaleVal }}
+            transition={show ? openSpring : closeSpring}
+            layout="preserve-aspect"
+            style={{
+              zIndex,
+              y,
+            }}
+            drag={show && !isDragging ? "y" : false}
+            dragConstraints={constraints}
+            onDrag={checkSwipeToDismiss}
+            onClick={onClickCard}
+            onUpdate={checkZIndex}
+            onMouseDown={() => setIsDragging(true)}
+            onMouseUp={() => setIsDragging(false)}
+            onMouseEnter={handleOnMouseEnter}
+            onMouseLeave={handleOnMouseLeave}
+          >
+            <Title title={title} show={show} />
+            {show && <CloseButton show={show} closeCard={closeCard} />}
+            <Content show={show} setShow={setShow} />
+            <HighlightedCode
+              sampleCode={sampleCode}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          </motion.div>
+        </div>
+      </li>
+    );
+  }
+);
 
 const Overlay: React.FC<{
   show: boolean;

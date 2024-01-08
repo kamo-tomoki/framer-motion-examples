@@ -1,12 +1,3 @@
-.selectbox-container {
-  height: 100%;
-  color: #d2c;
-  background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
-  height: 410px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .menu {
   background-color: white;
   border-radius: 10px;

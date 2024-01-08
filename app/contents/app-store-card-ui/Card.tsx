@@ -67,7 +67,7 @@ const Card: React.FC<Props> = ({ parentShow, setParentShow }) => {
         onClick={() => setShow(false)}
       >
         <motion.div
-          className="appstore-card-content"
+          className="appstore-card-content shadow-xl"
           initial={{ scale: 1 }}
           animate={{ scale: scaleVal }}
           transition={show ? openSpring : closeSpring}

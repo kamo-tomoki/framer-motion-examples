@@ -22,7 +22,6 @@
   pointer-events: auto;
   position: relative;
   border-radius: 20px;
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.5);
   background-color: white;
   overflow: hidden;
   width: 100%;
@@ -67,4 +66,14 @@
 
 .appstore-card-content span {
   font-size: 18px;
+}
+
+@media only screen and (max-width: 650px) {
+  .appstore-card-ui-bg {
+    height: 360px;
+  }
+
+  .appstore-card-content {
+    margin-top: 70px;
+  }
 }

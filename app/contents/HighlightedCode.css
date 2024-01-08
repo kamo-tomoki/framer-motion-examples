@@ -3,17 +3,14 @@
   user-select: text;
 }
 
-.code-selector {
+.code-header {
+  top: 0;
   display: flex;
   justify-content: space-between;
-  width: 150px;
-  border-radius: 10px;
-  border: 1px solid white;
-  backdrop-filter: blur(30px);
-}
-
-.code-selector-item {
-  color: white;
+  align-items: center;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 span {

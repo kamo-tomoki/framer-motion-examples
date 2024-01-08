@@ -24,7 +24,7 @@ const SelectBox: React.FC<Props> = ({ show }) => {
     }
   }, [show]);
   return (
-    <div className="selectbox-container">
+    <div className="content-wrapper">
       <motion.nav
         initial={false}
         animate={isOpen ? "open" : "closed"}
