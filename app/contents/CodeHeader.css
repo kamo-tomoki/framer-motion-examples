@@ -1,0 +1,24 @@
+.code-header-container {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  max-width: 900px;
+  z-index: 100;
+  background-color: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.code-header-test {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+span {
+  font-size: 18px;
+}

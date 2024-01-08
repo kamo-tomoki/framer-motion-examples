@@ -7,17 +7,23 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ReactIcon from "../icons/ReactIcon";
 import CssIcon from "../icons/CssIcon";
 import CopyIcon from "../icons/CopyIcon";
+import { motion } from "framer-motion";
 
 type Props = {
   sampleCode: { [key: string]: string };
+  activeTab: string;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 };
-const HighlightedCode: React.FC<Props> = ({ sampleCode }) => {
-  const [activeTab, setActiveTab] = useState(Object.entries(sampleCode)[0][0]);
-
+const HighlightedCode: React.FC<Props> = ({
+  sampleCode,
+  activeTab,
+  setActiveTab,
+}) => {
   return (
     <div className="code-container">
-      <div className="code-header dark">
+      <motion.div className="code-header dark">
         <Tabs
+          selectedKey={activeTab}
           onSelectionChange={(key) => {
             typeof key === "string" && setActiveTab(key);
           }}
@@ -45,7 +51,7 @@ const HighlightedCode: React.FC<Props> = ({ sampleCode }) => {
             <CopyIcon />
           </Button>
         </CopyToClipboard>
-      </div>
+      </motion.div>
       <SyntaxHighlighter
         language={activeTab.split(".").pop()}
         style={vscDarkPlus}

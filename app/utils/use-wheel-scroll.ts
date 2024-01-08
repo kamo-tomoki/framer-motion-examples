@@ -1,6 +1,5 @@
 import { Dispatch, RefObject, SetStateAction, useState } from "react";
 import { useDomEvent, MotionValue, useSpring } from "framer-motion";
-import { spring } from "popmotion";
 import { mix } from "@popmotion/popcorn";
 import { debounce } from "lodash";
 
