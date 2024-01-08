@@ -42,7 +42,7 @@ const BlurredModal: React.FC<Props> = ({ show }) => {
               }}
               exit={{
                 backdropFilter: "blur(0px)",
-                WebkitBackdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(0px)",
               }}
               onClick={() => setIsOpen(false)}
             ></motion.div>
