@@ -36,11 +36,13 @@ const Samples = () => {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [stickyCodeHeader, setStickyCodeHeader] = useState(false);
   const [activeTab, setActiveTab] = useState(Object.entries(sampleCode)[0][0]);
-  const sm = !useMediaQuery({ query: "(min-width: 651px)" });
+  const sm = !useMediaQuery({ query: "(min-width: 701px)" });
 
   return (
-    <div className="container pt-[40px]">
-      <h1 className="font-bold text-4xl mb-5">Pick up</h1>
+    <div className="container pt-[40px] px-[25px]">
+      <h1 className={`font-bold text-4xl mb-5 ${sm && "pl-[25px]"}`}>
+        Pick up
+      </h1>
       <ul className="card-list">
         {samplesData.map((sampleData, index) => (
           <Card
