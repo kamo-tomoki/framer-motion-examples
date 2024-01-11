@@ -34,6 +34,7 @@ type Props = {
   setActiveTab: React.Dispatch<SetStateAction<string>>;
   setSelectedCard: React.Dispatch<SetStateAction<number | null>>;
   setStickyCodeHeader: React.Dispatch<SetStateAction<boolean>>;
+  setToast: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 // eslint-disable-next-line react/display-name
@@ -48,6 +49,7 @@ const Card = memo(
     setActiveTab,
     setSelectedCard,
     setStickyCodeHeader,
+    setToast,
   }: Props) => {
     const [show, setShow] = useState(false);
     const [scaleVal, setScaleVal] = useState(1);
@@ -163,6 +165,7 @@ const Card = memo(
               sampleCode={sampleCode}
               activeTab={activeTab}
               setActiveTab={setActiveTab}
+              setToast={setToast}
             />
           </motion.div>
         </div>

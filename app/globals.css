@@ -52,6 +52,18 @@ header span {
   align-items: center;
 }
 
+.toast {
+  position: fixed;
+  bottom: 30px;
+  color: white;
+  background-color: rgba(63, 63, 70, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 15px 20px;
+  font-size: 19px;
+}
+
 @media only screen and (max-width: 700px) {
   .content-wrapper {
     height: 360px;

@@ -9,7 +9,7 @@
   -webkit-backdrop-filter: blur(30px);
 }
 
-.code-header-test {
+.code-header-sticky {
   display: flex;
   justify-content: space-between;
   align-items: center;

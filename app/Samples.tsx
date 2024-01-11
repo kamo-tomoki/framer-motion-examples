@@ -8,6 +8,7 @@ import BlurredModal from "./contents/blurred-modal/BlurredModal";
 import { useState } from "react";
 import CodeHeader from "./contents/CodeHeader";
 import { useMediaQuery } from "react-responsive";
+import Toast from "./Toast";
 
 const samplesData = [
   {
@@ -36,6 +37,7 @@ const Samples = () => {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [stickyCodeHeader, setStickyCodeHeader] = useState(false);
   const [activeTab, setActiveTab] = useState(Object.entries(sampleCode)[0][0]);
+  const [toast, setToast] = useState<string | null>(null);
   const sm = !useMediaQuery({ query: "(min-width: 701px)" });
 
   return (
@@ -56,16 +58,24 @@ const Samples = () => {
             setActiveTab={setActiveTab}
             setSelectedCard={setSelectedCard}
             setStickyCodeHeader={setStickyCodeHeader}
+            setToast={setToast}
           />
         ))}
       </ul>
       {selectedCard !== null && stickyCodeHeader && (
-        <CodeHeader
-          sampleCode={samplesData[selectedCard].sampleCode}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
+        <div className="flex justify-center">
+          <div className="code-header-container">
+            <CodeHeader
+              sampleCode={samplesData[selectedCard].sampleCode}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              setToast={setToast}
+              sticky
+            />
+          </div>
+        </div>
       )}
+      <Toast toast={toast} />
     </div>
   );
 };
