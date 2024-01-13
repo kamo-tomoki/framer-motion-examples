@@ -9,7 +9,8 @@ interface Constraints {
  * Calculate the top/bottom scroll constraints of a full-screen element vs the viewport
  */
 export function useScrollConstraints(
-  ref: RefObject<HTMLDivElement>,
+  cardTop: number | undefined,
+  cardHeight: number | undefined,
   measureConstraints: boolean
 ) {
   const [constraints, setConstraints] = useState<Constraints>({
@@ -19,16 +20,18 @@ export function useScrollConstraints(
 
   useEffect(() => {
     if (!measureConstraints) return;
+    else if (
+      typeof cardTop === "undefined" ||
+      typeof cardHeight === "undefined"
+    )
+      return;
 
-    const element = ref.current;
     const viewportHeight = window.innerHeight;
-    const contentTop = element!.offsetTop;
-    const contentHeight = element!.offsetHeight;
-    const scrollableViewport = viewportHeight - contentTop * 2;
-    const top = Math.min(scrollableViewport - contentHeight, 0);
+    const scrollableViewport = viewportHeight - cardTop * 2;
+    const top = Math.min(scrollableViewport - cardHeight, 0);
 
     setConstraints({ top, bottom: 0 });
-  }, [measureConstraints]);
+  }, [measureConstraints, cardTop, cardHeight]);
 
   return constraints;
 }

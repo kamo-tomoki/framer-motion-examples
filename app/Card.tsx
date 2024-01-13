@@ -61,12 +61,18 @@ const Card = memo(
     const y = useSpring(0, { stiffness: 1400, damping: 90 });
 
     const cardRef = useRef<HTMLDivElement>(null);
-    const constraints = useScrollConstraints(cardRef, show);
+    const cardTop = cardRef.current?.offsetTop;
+    const cardHeight = cardRef.current?.offsetHeight;
+    const constraints = useScrollConstraints(cardTop, cardHeight, show);
 
     const containerRef = useRef<HTMLLIElement>(null);
     const dismissDistance = 80;
     const checkSwipeToDismiss = () => {
-      if (y.get() > dismissDistance) setShow(false);
+      // found a bug so temporarily disabled
+      /* if (y.get() > dismissDistance) {
+        y.set(0);
+        setShow(false);
+      } */
     };
     useWheelScroll(
       containerRef,
@@ -88,7 +94,6 @@ const Card = memo(
     };
 
     useMotionValueEvent(y, "change", (latest: number) => {
-      // console.log(latest);
       if (sm) {
         latest <= -360 ? setStickyCodeHeader(true) : setStickyCodeHeader(false);
       } else {
@@ -97,6 +102,7 @@ const Card = memo(
     });
 
     const closeCard = async () => {
+      if (!show) return;
       y.set(0);
       if (y.get() < -100) {
         await timer(300);
@@ -162,6 +168,7 @@ const Card = memo(
             {show && <CloseButton show={show} closeCard={closeCard} />}
             <Content show={show} setShow={setShow} />
             <HighlightedCode
+              sm={sm}
               sampleCode={sampleCode}
               activeTab={activeTab}
               setActiveTab={setActiveTab}

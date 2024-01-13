@@ -4,12 +4,14 @@ import "./HighlightedCode.css";
 import CodeHeader from "./CodeHeader";
 
 type Props = {
+  sm: boolean;
   sampleCode: { [key: string]: string };
   activeTab: string;
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
   setToast: React.Dispatch<React.SetStateAction<string | null>>;
 };
 const HighlightedCode: React.FC<Props> = ({
+  sm,
   sampleCode,
   activeTab,
   setActiveTab,
@@ -24,15 +26,22 @@ const HighlightedCode: React.FC<Props> = ({
         setToast={setToast}
         sticky={false}
       />
-      <SyntaxHighlighter
-        language={activeTab.split(".").pop()}
-        style={vscDarkPlus}
-        wrapLines
-        wrapLongLines
-        customStyle={{ margin: 0, padding: "20px 40px" }}
-      >
-        {sampleCode[activeTab]}
-      </SyntaxHighlighter>
+      <div>
+        <SyntaxHighlighter
+          language={activeTab.split(".").pop()}
+          style={vscDarkPlus}
+          wrapLines
+          wrapLongLines
+          customStyle={{
+            margin: 0,
+            padding: `20px ${sm ? "20px" : "40px"}`,
+            width: "100%",
+            overflow: sm ? "hidden" : "auto",
+          }}
+        >
+          {sampleCode[activeTab]}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 };
