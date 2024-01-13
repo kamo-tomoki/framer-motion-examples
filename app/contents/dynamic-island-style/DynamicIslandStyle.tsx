@@ -51,7 +51,9 @@ const DynamicIslandStyle: React.FC<Props> = ({ show }) => {
   return (
     <div className="content-wrapper" onClick={handleClick}>
       <motion.div
-        className={`bg-white island ${"island-" + island}`}
+        className={`bg-white island ${"island-" + island} ${
+          show && "mt-[100px]"
+        }`}
         layout
         initial={{ borderRadius: 50 }}
         animate={isOn ? "up" : "reset"}

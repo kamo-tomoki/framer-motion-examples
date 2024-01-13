@@ -5,7 +5,6 @@ import CopyIcon from "../icons/CopyIcon";
 import "./CodeHeader.css";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { memo, useState } from "react";
-import Copy from "./Copy";
 
 type Props = {
   sampleCode: { [key: string]: string };

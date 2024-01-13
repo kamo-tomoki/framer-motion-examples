@@ -7,7 +7,6 @@ type Props = {
 
 // eslint-disable-next-line react/display-name
 const Toast = memo(({ toast }: Props) => {
-  console.log("toast", toast);
   return (
     <AnimatePresence>
       {toast && (
