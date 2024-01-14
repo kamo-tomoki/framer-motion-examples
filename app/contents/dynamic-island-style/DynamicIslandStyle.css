@@ -1,5 +1,6 @@
 .island {
   position: absolute;
+  border-radius: 50px;
 }
 
 .island-start-open,
@@ -9,9 +10,14 @@
 }
 
 .island-open,
-.island-remove-text,
-.island-disabled {
+.island-remove-text {
   width: 300px;
+  height: 40px;
+}
+
+.island-disabled {
+  width: 60%;
+  max-width: 300px;
   height: 40px;
 }
 

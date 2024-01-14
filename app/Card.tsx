@@ -87,7 +87,6 @@ const Card = memo(
       if (show) {
         setScaleVal(1);
         zIndex.set(2);
-        return;
       } else if (!show && !hover && latest.scale == 1.05) {
         setScaleVal(1);
       }

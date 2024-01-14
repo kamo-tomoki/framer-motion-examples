@@ -16,6 +16,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  position: absolute;
+  top: 100px;
+  width: 100%;
 }
 
 .appstore-card-content {
@@ -25,17 +28,14 @@
   background-color: white;
   overflow: hidden;
   width: 100%;
-  /* height: 100%; */
   height: 180px;
   margin: 0 auto;
-  margin-top: 110px;
 }
 
 .appstore-card-open .appstore-card-content {
   height: 180px;
   max-width: 700px;
   overflow: hidden;
-  margin-top: 100px;
 }
 
 .appstore-card-content-container {
@@ -52,7 +52,7 @@
   position: fixed;
   z-index: 1;
   overflow: hidden;
-  padding: 40px 0;
+  padding: 110px 0;
 }
 
 .appstore-card-title {
@@ -73,7 +73,11 @@
     height: 360px;
   }
 
-  .appstore-card-content {
-    margin-top: 70px;
+  .appstore-card-list {
+    top: 70px;
+  }
+
+  .appstore-card-content-container.appstore-card-open {
+    padding: 70px 0;
   }
 }
