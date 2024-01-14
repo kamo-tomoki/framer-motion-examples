@@ -47,12 +47,15 @@ header span {
 }
 
 .link {
+  display: flex;
+  align-items: center;
   transition: 0.3s;
   font-size: 17px;
 }
 
 .link:hover {
   color: #d2c;
+  fill: #d2c;
 }
 
 .content-wrapper {

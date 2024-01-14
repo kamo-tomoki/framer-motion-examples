@@ -1,3 +1,6 @@
+import ExternalLinkIcon from "./icons/ExternalLinkIcon";
+import GithubIcon from "./icons/GithubIcon";
+
 const Header = () => {
   return (
     <header>
@@ -11,6 +14,7 @@ const Header = () => {
             href="https://www.framer.com/motion/"
             target="_blank"
           >
+            <ExternalLinkIcon w={14} h={14} className="mr-2" />
             Official Site
           </a>
           <a
@@ -18,6 +22,7 @@ const Header = () => {
             href="https://github.com/kamo-tomoki/framer-motion-samples"
             target="_blank"
           >
+            <GithubIcon className="mr-1" />
             GitHub
           </a>
         </div>
