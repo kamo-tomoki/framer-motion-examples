@@ -22,7 +22,7 @@ const Header = () => {
             href="https://github.com/kamo-tomoki/framer-motion-samples"
             target="_blank"
           >
-            <GithubIcon className="mr-1" />
+            <GithubIcon className="mr-[6px]" w={17} h={17} />
             GitHub
           </a>
         </div>
