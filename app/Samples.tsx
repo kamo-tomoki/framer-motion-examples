@@ -41,7 +41,7 @@ const Samples = () => {
   const sm = !useMediaQuery({ query: "(min-width: 701px)" });
 
   return (
-    <div className="container pt-[40px] px-[25px]">
+    <div className="container py-[40px] px-[25px] mb-3">
       <h1 className={`font-bold text-4xl mb-5 ${sm && "pl-[25px]"}`}>
         Pick up
       </h1>

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  min-width: 370px;
+}
+
 main {
   display: flex;
   justify-content: center;
@@ -53,7 +57,12 @@ header span {
   font-size: 17px;
 }
 
-.link:hover {
+.footer-link {
+  transition: 0.3s;
+}
+
+.link:hover,
+.footer-link:hover {
   color: #d2c;
   fill: #d2c;
 }
