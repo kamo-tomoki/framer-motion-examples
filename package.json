@@ -18,7 +18,6 @@
     "@nextui-org/react": "^2.2.9",
     "@popmotion/popcorn": "^0.4.4",
     "@types/react-copy-to-clipboard": "^5.0.7",
-    "flubber": "^0.4.2",
     "framer-motion": "^10.16.16",
     "next": "14.0.4",
     "popmotion": "^11.0.5",
