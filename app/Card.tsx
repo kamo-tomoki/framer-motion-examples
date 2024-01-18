@@ -30,8 +30,8 @@ type Props = {
   sampleCode: { [key: string]: string };
   title: string;
   sm: boolean;
-  activeTab: string;
-  setActiveTab: React.Dispatch<SetStateAction<string>>;
+  activeTab: string | null;
+  setActiveTab: React.Dispatch<SetStateAction<string | null>>;
   setSelectedCard: React.Dispatch<SetStateAction<number | null>>;
   setStickyCodeHeader: React.Dispatch<SetStateAction<boolean>>;
   setToast: React.Dispatch<React.SetStateAction<string | null>>;
@@ -115,11 +115,17 @@ const Card = memo(
     };
 
     const handleOnMouseEnter = () => {
+      if (show || zIndex.get() === 2) {
+        return;
+      }
       setHover(true);
       !show && setScaleVal(1.05);
     };
 
     const handleOnMouseLeave = () => {
+      if (show || zIndex.get() === 2) {
+        return;
+      }
       setHover(false);
       !show && setScaleVal(1);
     };
@@ -166,13 +172,15 @@ const Card = memo(
             <Title title={title} show={show} />
             {show && <CloseButton show={show} closeCard={closeCard} />}
             <Content show={show} setShow={setShow} />
-            <HighlightedCode
-              sm={sm}
-              sampleCode={sampleCode}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              setToast={setToast}
-            />
+            {show && activeTab && (
+              <HighlightedCode
+                sm={sm}
+                sampleCode={sampleCode}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                setToast={setToast}
+              />
+            )}
           </motion.div>
         </div>
       </li>

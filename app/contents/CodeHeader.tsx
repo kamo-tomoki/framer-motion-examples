@@ -11,7 +11,7 @@ type Props = {
   activeTab: string;
   sticky: boolean;
   setToast: React.Dispatch<React.SetStateAction<string | null>>;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  setActiveTab: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 // eslint-disable-next-line react/display-name

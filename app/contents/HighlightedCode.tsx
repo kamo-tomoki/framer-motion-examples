@@ -7,7 +7,7 @@ type Props = {
   sm: boolean;
   sampleCode: { [key: string]: string };
   activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  setActiveTab: React.Dispatch<React.SetStateAction<string | null>>;
   setToast: React.Dispatch<React.SetStateAction<string | null>>;
 };
 const HighlightedCode: React.FC<Props> = ({
