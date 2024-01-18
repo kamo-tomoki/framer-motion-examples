@@ -61,9 +61,7 @@ const Card = memo(
     const y = useSpring(0, { stiffness: 1400, damping: 90 });
 
     const cardRef = useRef<HTMLDivElement>(null);
-    const cardTop = cardRef.current?.offsetTop;
-    const cardHeight = cardRef.current?.offsetHeight;
-    const constraints = useScrollConstraints(cardTop, cardHeight, show);
+    const constraints = useScrollConstraints(cardRef, show, sm);
 
     const containerRef = useRef<HTMLLIElement>(null);
     const dismissDistance = 80;
