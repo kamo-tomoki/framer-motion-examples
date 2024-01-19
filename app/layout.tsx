@@ -18,9 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <GoogleAdsense pId="4436108648632802" />
+      </head>
       <body className={inter.className}>{children}</body>
       <GoogleAnalytics gaId="G-1GELWPGE7D" />
-      <GoogleAdsense pId="4436108648632802" />
     </html>
   );
 }
