@@ -15,6 +15,7 @@
 .blurred-modal-disabled {
   height: 50%;
   margin-top: 1rem;
+  min-width: 180px;
 }
 
 .no-blur {
@@ -32,7 +33,7 @@
   background-color: rgba(230, 190, 226, 0.8);
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 700px) {
   .blurred-modal-overlay {
     height: 360px;
   }

@@ -1,5 +1,5 @@
-import { Dispatch, RefObject, SetStateAction, useState } from "react";
-import { useDomEvent, MotionValue, useSpring } from "framer-motion";
+import { Dispatch, RefObject, SetStateAction } from "react";
+import { useDomEvent, MotionValue } from "framer-motion";
 import { mix } from "@popmotion/popcorn";
 import { debounce } from "lodash";
 
@@ -18,20 +18,6 @@ const elasticFactor = 0.2;
 function springTo(value: MotionValue, from: number, to: number) {
   if (value.isAnimating()) return;
   value.set(to);
-  /* value.start((complete) => {
-    const animation = spring({
-      from,
-      to,
-      velocity: value.getVelocity(),
-      stiffness: 400,
-      damping: 40,
-    }).start({
-      update: (v: number) => value.set(v),
-      complete,
-    });
-
-    return () => animation.stop();
-  }); */
 }
 
 const debouncedSpringTo = debounce(springTo, 100);

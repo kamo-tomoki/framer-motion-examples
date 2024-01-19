@@ -1,4 +1,5 @@
 import { useState, useEffect, RefObject } from "react";
+import useResizeObserver from "./use-resize-observer";
 
 interface Constraints {
   top: number;
@@ -10,25 +11,30 @@ interface Constraints {
  */
 export function useScrollConstraints(
   ref: RefObject<HTMLDivElement>,
-  measureConstraints: boolean
+  measureConstraints: boolean,
+  sm: boolean
 ) {
   const [constraints, setConstraints] = useState<Constraints>({
     top: 0,
     bottom: 0,
   });
 
+  // watch for changes in the element's height
+  // height would be changed in responsive breakpoint
+  const { height } = useResizeObserver(ref);
+
   useEffect(() => {
     if (!measureConstraints) return;
+    else if (!ref.current) return;
 
     const element = ref.current;
     const viewportHeight = window.innerHeight;
-    const contentTop = element!.offsetTop;
-    const contentHeight = element!.offsetHeight;
-    const scrollableViewport = viewportHeight - contentTop * 2;
-    const top = Math.min(scrollableViewport - contentHeight, 0);
+    const top = element.offsetTop;
+    const scrollableViewport = viewportHeight - top * 2;
+    const constraintsTop = Math.min(scrollableViewport - height, 0);
 
-    setConstraints({ top, bottom: 0 });
-  }, [measureConstraints]);
+    setConstraints({ top: constraintsTop, bottom: 0 });
+  }, [measureConstraints, height]);
 
   return constraints;
 }

@@ -3,10 +3,12 @@ import {
   MouseEvent,
   SetStateAction,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { closeSpring, openSpring } from "@/app/utils/animation";
+import useResizeObserver from "@/app/utils/use-resize-observer";
 
 type Props = {
   parentShow: boolean;
@@ -15,9 +17,8 @@ type Props = {
 
 const Card: React.FC<Props> = ({ parentShow, setParentShow }) => {
   const [show, setShow] = useState(false);
-  const zIndex = useMotionValue(0);
-  const [hover, setHover] = useState(false);
   const [scaleVal, setScaleVal] = useState(1);
+  const zIndex = useMotionValue(0);
 
   const onClickCard = (e: MouseEvent<HTMLInputElement>) => {
     e.stopPropagation();
@@ -29,33 +30,32 @@ const Card: React.FC<Props> = ({ parentShow, setParentShow }) => {
   };
 
   const handleOnMouseEnter = () => {
-    setHover(true);
     if (parentShow && !show) setScaleVal(1.05);
   };
 
   const handleOnMouseLeave = () => {
-    setHover(false);
-    if (parentShow && !show) {
-      setScaleVal(1);
+    if (parentShow && !show) setScaleVal(1);
+  };
+
+  const handleStyleUpdate = (latest: {
+    zIndex: number;
+    scale: number;
+    width: number;
+  }) => {
+    // when animation is done
+    if (latest.width === width) {
+      // if it's a close animation
+      if (!show) {
+        zIndex.set(0);
+      }
     }
   };
 
-  const checkZIndex = (latest: { scale: number }) => {
-    if (show) {
-      setScaleVal(1);
-      zIndex.set(2);
-    } else if (!show && !hover && latest.scale == 1.05) {
-      setScaleVal(1);
-    }
-  };
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { width } = useResizeObserver(containerRef);
 
   useEffect(() => {
-    if (show) {
-      zIndex.set(2);
-      setHover(false);
-    } else {
-      zIndex.set(0);
-    }
+    show && zIndex.set(2);
   }, [show]);
 
   return (
@@ -64,19 +64,20 @@ const Card: React.FC<Props> = ({ parentShow, setParentShow }) => {
         className={`appstore-card-content-container ${
           show && "appstore-card-open"
         }`}
+        ref={containerRef}
         onClick={() => setShow(false)}
       >
         <motion.div
           className="appstore-card-content shadow-xl"
           initial={{ scale: 1 }}
-          animate={{ scale: scaleVal }}
+          animate={{ scale: scaleVal, width: width }}
           transition={show ? openSpring : closeSpring}
           layout="position"
           style={{
             zIndex,
           }}
           onClick={onClickCard}
-          onUpdate={checkZIndex}
+          onUpdate={handleStyleUpdate}
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
         ></motion.div>

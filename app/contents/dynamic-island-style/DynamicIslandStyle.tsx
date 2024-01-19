@@ -1,7 +1,6 @@
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./DynamicIslandStyle.css";
-import timer from "@/app/utils/timer";
 import Switch from "./Switch";
 
 type Props = {
@@ -31,29 +30,14 @@ const DynamicIslandStyle: React.FC<Props> = ({ show }) => {
     }
   }, [show]);
 
-  const handleClick = async () => {
-    /* if (!show) return;
-    if (isOn) {
-      setIsland("remove-text");
-      await timer(200);
-      setIsland("start-close");
-      await timer(600);
-      setIsland("close");
-      setIsOn(!isOn);
-    } else {
-      setIsland("start-open");
-      setIsOn(!isOn);
-      await timer(400);
-      setIsland("open");
-    } */
-  };
-
   return (
-    <div className="content-wrapper" onClick={handleClick}>
+    <div className="content-wrapper">
       <motion.div
-        className={`bg-white island ${"island-" + island}`}
-        layout
         initial={{ borderRadius: 50 }}
+        className={`bg-white island ${"island-" + island} ${
+          show && "mt-[100px]"
+        }`}
+        layout
         animate={isOn ? "up" : "reset"}
         variants={{
           up: {

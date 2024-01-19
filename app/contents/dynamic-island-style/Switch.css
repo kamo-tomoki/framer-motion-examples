@@ -7,6 +7,7 @@
   border-radius: 50px;
   padding: 7px;
   cursor: pointer;
+  margin-top: 100px;
 }
 
 .switch[data-isOn="true"] {

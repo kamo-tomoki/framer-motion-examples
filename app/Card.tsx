@@ -30,10 +30,11 @@ type Props = {
   sampleCode: { [key: string]: string };
   title: string;
   sm: boolean;
-  activeTab: string;
-  setActiveTab: React.Dispatch<SetStateAction<string>>;
+  activeTab: string | null;
+  setActiveTab: React.Dispatch<SetStateAction<string | null>>;
   setSelectedCard: React.Dispatch<SetStateAction<number | null>>;
   setStickyCodeHeader: React.Dispatch<SetStateAction<boolean>>;
+  setToast: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 // eslint-disable-next-line react/display-name
@@ -48,6 +49,7 @@ const Card = memo(
     setActiveTab,
     setSelectedCard,
     setStickyCodeHeader,
+    setToast,
   }: Props) => {
     const [show, setShow] = useState(false);
     const [scaleVal, setScaleVal] = useState(1);
@@ -59,12 +61,16 @@ const Card = memo(
     const y = useSpring(0, { stiffness: 1400, damping: 90 });
 
     const cardRef = useRef<HTMLDivElement>(null);
-    const constraints = useScrollConstraints(cardRef, show);
+    const constraints = useScrollConstraints(cardRef, show, sm);
 
     const containerRef = useRef<HTMLLIElement>(null);
     const dismissDistance = 80;
     const checkSwipeToDismiss = () => {
-      if (y.get() > dismissDistance) setShow(false);
+      // found a bug so temporarily disabled
+      /* if (y.get() > dismissDistance) {
+        y.set(0);
+        setShow(false);
+      } */
     };
     useWheelScroll(
       containerRef,
@@ -79,14 +85,12 @@ const Card = memo(
       if (show) {
         setScaleVal(1);
         zIndex.set(2);
-        return;
       } else if (!show && !hover && latest.scale == 1.05) {
         setScaleVal(1);
       }
     };
 
     useMotionValueEvent(y, "change", (latest: number) => {
-      // console.log(latest);
       if (sm) {
         latest <= -360 ? setStickyCodeHeader(true) : setStickyCodeHeader(false);
       } else {
@@ -95,6 +99,7 @@ const Card = memo(
     });
 
     const closeCard = async () => {
+      if (!show) return;
       y.set(0);
       if (y.get() < -100) {
         await timer(300);
@@ -108,11 +113,17 @@ const Card = memo(
     };
 
     const handleOnMouseEnter = () => {
+      if (show || zIndex.get() === 2) {
+        return;
+      }
       setHover(true);
       !show && setScaleVal(1.05);
     };
 
     const handleOnMouseLeave = () => {
+      if (show || zIndex.get() === 2) {
+        return;
+      }
       setHover(false);
       !show && setScaleVal(1);
     };
@@ -159,11 +170,15 @@ const Card = memo(
             <Title title={title} show={show} />
             {show && <CloseButton show={show} closeCard={closeCard} />}
             <Content show={show} setShow={setShow} />
-            <HighlightedCode
-              sampleCode={sampleCode}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
+            {show && activeTab && (
+              <HighlightedCode
+                sm={sm}
+                sampleCode={sampleCode}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                setToast={setToast}
+              />
+            )}
           </motion.div>
         </div>
       </li>
