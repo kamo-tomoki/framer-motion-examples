@@ -2,33 +2,27 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./HighlightedCode.css";
 import CodeHeader from "./CodeHeader";
+import { useContext } from "react";
+import { MediaContext } from "@/contexts/MediaContext";
+import { CodeContext } from "@/contexts/CardContext";
+import { ToastContext } from "@/contexts/ToastContext";
 
 type Props = {
-  sm: boolean;
   sampleCode: { [key: string]: string };
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string | null>>;
-  setToast: React.Dispatch<React.SetStateAction<string | null>>;
 };
-const HighlightedCode: React.FC<Props> = ({
-  sm,
-  sampleCode,
-  activeTab,
-  setActiveTab,
-  setToast,
-}) => {
+const HighlightedCode: React.FC<Props> = ({ sampleCode }) => {
+  const sm = useContext(MediaContext);
+  const { selectedCode } = useContext(CodeContext);
+  const { setToast } = useContext(ToastContext);
+
+  if (!selectedCode) return <></>;
+
   return (
     <div className="code-container">
-      <CodeHeader
-        sampleCode={sampleCode}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        setToast={setToast}
-        sticky={false}
-      />
+      <CodeHeader sampleCode={sampleCode} setToast={setToast} sticky={false} />
       <div>
         <SyntaxHighlighter
-          language={activeTab.split(".").pop()}
+          language={selectedCode.split(".").pop()}
           style={vscDarkPlus}
           wrapLines
           wrapLongLines
@@ -39,7 +33,7 @@ const HighlightedCode: React.FC<Props> = ({
             overflow: sm ? "hidden" : "auto",
           }}
         >
-          {sampleCode[activeTab]}
+          {sampleCode[selectedCode]}
         </SyntaxHighlighter>
       </div>
     </div>

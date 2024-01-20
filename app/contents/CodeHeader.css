@@ -19,12 +19,12 @@
   padding-right: 10px;
 }
 
-.code-header-tab span {
+.tab span {
   font-size: 16px;
 }
 
 @media only screen and (max-width: 700px) {
   .code-header-tab span {
-    font-size: 12px !important;
+    font-size: 13px !important;
   }
 }

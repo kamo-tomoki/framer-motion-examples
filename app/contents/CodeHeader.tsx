@@ -4,39 +4,43 @@ import CssIcon from "../icons/CssIcon";
 import CopyIcon from "../icons/CopyIcon";
 import "./CodeHeader.css";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { memo, useState } from "react";
+import { memo, useContext } from "react";
 import TypeScriptIcon from "../icons/TypeScriptIcon";
+import { MediaContext } from "@/contexts/MediaContext";
+import { CodeContext } from "@/contexts/CardContext";
 
 type Props = {
   sampleCode: { [key: string]: string };
-  activeTab: string;
   sticky: boolean;
   setToast: React.Dispatch<React.SetStateAction<string | null>>;
-  setActiveTab: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 // eslint-disable-next-line react/display-name
-const CodeHeader = memo(
-  ({ sampleCode, activeTab, sticky, setToast, setActiveTab }: Props) => {
-    const showToast = () => {
-      setToast("Copied to clipboard");
-      setTimeout(() => {
-        setToast(null);
-      }, 2000);
-    };
-    return (
-      <div className={`dark code-header${sticky ? "-sticky" : ""}`}>
+const CodeHeader = memo(({ sampleCode, sticky, setToast }: Props) => {
+  const sm = useContext(MediaContext);
+  const { selectedCode, setSelectedCode } = useContext(CodeContext);
+
+  const showToast = () => {
+    setToast("Copied to clipboard");
+    setTimeout(() => {
+      setToast(null);
+    }, 2000);
+  };
+
+  return (
+    <div className={`dark code-header${sticky ? "-sticky" : ""}`}>
+      <div className="tabs">
         <Tabs
-          selectedKey={activeTab}
+          selectedKey={selectedCode}
           onSelectionChange={(key) => {
-            typeof key === "string" && setActiveTab(key);
+            typeof key === "string" && setSelectedCode(key);
           }}
         >
           {Object.keys(sampleCode).map((key) => (
             <Tab
               key={key}
               title={
-                <div className="code-header-tab flex items-center space-x-2">
+                <div className="tab flex items-center space-x-2">
                   {key.split(".").pop() === "tsx" ? (
                     <ReactIcon />
                   ) : key.split(".").pop() === "ts" ? (
@@ -52,14 +56,16 @@ const CodeHeader = memo(
             />
           ))}
         </Tabs>
-        <CopyToClipboard text={sampleCode[activeTab]}>
-          <Button isIconOnly onClick={showToast}>
-            <CopyIcon />
+      </div>
+      {selectedCode && (
+        <CopyToClipboard text={sampleCode[selectedCode]}>
+          <Button isIconOnly onClick={showToast} size={sm ? "sm" : "md"}>
+            <CopyIcon w={sm ? 14 : 20} h={sm ? 16 : 20} />
           </Button>
         </CopyToClipboard>
-      </div>
-    );
-  }
-);
+      )}
+    </div>
+  );
+});
 
 export default CodeHeader;
