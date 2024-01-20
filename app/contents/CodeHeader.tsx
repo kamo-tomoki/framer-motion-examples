@@ -5,6 +5,7 @@ import CopyIcon from "../icons/CopyIcon";
 import "./CodeHeader.css";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { memo, useState } from "react";
+import TypeScriptIcon from "../icons/TypeScriptIcon";
 
 type Props = {
   sampleCode: { [key: string]: string };
@@ -35,9 +36,11 @@ const CodeHeader = memo(
             <Tab
               key={key}
               title={
-                <div className="flex items-center space-x-2">
+                <div className="code-header-tab flex items-center space-x-2">
                   {key.split(".").pop() === "tsx" ? (
                     <ReactIcon />
+                  ) : key.split(".").pop() === "ts" ? (
+                    <TypeScriptIcon />
                   ) : key.split(".").pop() === "css" ? (
                     <CssIcon />
                   ) : (
