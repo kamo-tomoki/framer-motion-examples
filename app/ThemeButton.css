@@ -1,0 +1,9 @@
+.light-btn {
+  /* background-color: white;
+  fill: #d2c !important; */
+  background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
+}
+
+.dark-btn {
+  background: linear-gradient(135deg, #d2c, hsl(336, 100%, 67%));
+}

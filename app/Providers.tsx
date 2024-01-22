@@ -4,6 +4,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { MediaProvider } from "@/contexts/MediaContext";
 import { CardProvider } from "@/contexts/CardContext";
 import { ToastProvider } from "@/contexts/ToastContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 type Props = { children: React.ReactNode };
 
@@ -12,7 +13,9 @@ const Providers: React.FC<Props> = ({ children }) => {
     <NextUIProvider>
       <MediaProvider>
         <CardProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </ToastProvider>
         </CardProvider>
       </MediaProvider>
     </NextUIProvider>

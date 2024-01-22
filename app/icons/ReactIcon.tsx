@@ -4,8 +4,8 @@ const ReactIcon: React.FC<IconProps> = ({ w, h }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height={h || "16"}
-      width={w || "16"}
+      height={h || 16}
+      width={w || 16}
       viewBox="0 0 512 512"
       fill="#60DBFB"
     >
