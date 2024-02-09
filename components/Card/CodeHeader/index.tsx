@@ -7,17 +7,18 @@ import { MediaContext } from "@/contexts/MediaContext";
 import { CodeContext } from "@/contexts/CardContext";
 import CodeTabs from "./CodeTabs";
 import CodeSelect from "./CodeSelect";
+import { ToastContext } from "@/contexts/ToastContext";
 
 type Props = {
   sampleCode: { [key: string]: string };
   sticky: boolean;
-  setToast: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 // eslint-disable-next-line react/display-name
-const CodeHeader = memo(({ sampleCode, sticky, setToast }: Props) => {
+const CodeHeader = memo(({ sampleCode, sticky }: Props) => {
   const sm = useContext(MediaContext);
   const { selectedCode } = useContext(CodeContext);
+  const { setToast } = useContext(ToastContext);
 
   const showToast = () => {
     setToast("Copied to clipboard");
