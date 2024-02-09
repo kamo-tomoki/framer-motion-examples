@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer: React.FC = () => {
   return (
     <footer className="flex flex-col items-center py-8 text-sm text-gray-400">
@@ -16,9 +18,9 @@ const Footer: React.FC = () => {
         >
           GitHub
         </a>
-        <a className="footer-link" href="/privacy-policy">
+        <Link className="footer-link" href="/privacy-policy">
           Privacy Policy
-        </a>
+        </Link>
       </div>
       <p>© 2024 Tomoki Kamo. All Rights Reserved.</p>
     </footer>
