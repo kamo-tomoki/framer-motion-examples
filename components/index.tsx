@@ -2,14 +2,14 @@
 
 import Card from "./Card";
 import { useContext, useState } from "react";
-import lazyImport from "../utils/LazyImport";
 import { MediaContext } from "@/contexts/MediaContext";
 import { CardContext, CodeContext } from "@/contexts/CardContext";
 import samplesData from "./Card/contents";
 import { ThemeContext } from "@/contexts/ThemeContext";
+import dynamic from "next/dynamic";
 
-const CodeHeader = lazyImport(() => import("./Card/CodeHeader"));
-const Toast = lazyImport(() => import("./Toast"));
+const CodeHeader = dynamic(() => import("./Card/CodeHeader"), { ssr: false });
+const Toast = dynamic(() => import("./Toast"), { ssr: false });
 
 const Samples = () => {
   const [stickyCodeHeader, setStickyCodeHeader] = useState(false);
@@ -41,7 +41,6 @@ const Samples = () => {
           <div className="code-header-container">
             <CodeHeader
               sampleCode={samplesData[selectedCard].sampleCode}
-              activeTab={selectedCode}
               sticky
             />
           </div>

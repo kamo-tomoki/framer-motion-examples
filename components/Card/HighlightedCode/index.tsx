@@ -19,7 +19,7 @@ const HighlightedCode: React.FC<Props> = ({ sampleCode }) => {
 
   return (
     <div className="code-container">
-      <CodeHeader sampleCode={sampleCode} setToast={setToast} sticky={false} />
+      <CodeHeader sampleCode={sampleCode} sticky={false} />
       <div>
         <SyntaxHighlighter
           language={selectedCode.split(".").pop()}

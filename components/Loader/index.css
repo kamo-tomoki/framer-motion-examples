@@ -1,0 +1,24 @@
+.loader-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 80%;
+  height: 50%;
+  max-width: 400px;
+  max-height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  z-index: 2;
+  padding: 30px 40px;
+  background-color: white;
+  border-radius: 30px;
+}
+
+.loader {
+  width: 90%;
+  min-width: 200px;
+}
