@@ -1,4 +1,4 @@
-import samplesData from "@/app/contents";
+import samplesData from "@/components/Card/contents";
 import { createContext, useEffect, useState } from "react";
 
 export const CardContext = createContext<{

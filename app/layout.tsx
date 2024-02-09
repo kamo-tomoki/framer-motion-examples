@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-import GoogleAdsense from "./GoogleAdsense";
-import Providers from "./Providers";
-import Header from "./Header";
-import Footer from "./Footer";
+import GoogleAdsense from "../components/GoogleAdsense";
+import Providers from "../contexts";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export const runtime = "edge";
 
