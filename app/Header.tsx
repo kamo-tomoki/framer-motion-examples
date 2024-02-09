@@ -1,7 +1,12 @@
+"use client";
+
+import { useContext } from "react";
+import ThemeButton from "./ThemeButton";
 import ExternalLinkIcon from "./icons/ExternalLinkIcon";
 import GithubIcon from "./icons/GithubIcon";
+import { ThemeContext } from "@/contexts/ThemeContext";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header>
       <div className="header-container">
@@ -10,7 +15,7 @@ const Header = () => {
         </h1>
         <div className="flex mr-5 font-bold">
           <a
-            className="link mr-8"
+            className="header-link mr-8"
             href="https://www.framer.com/motion/"
             target="_blank"
           >
@@ -18,13 +23,14 @@ const Header = () => {
             Official Site
           </a>
           <a
-            className="link"
+            className="header-link mr-6"
             href="https://github.com/kamo-tomoki/framer-motion-samples"
             target="_blank"
           >
             <GithubIcon className="mr-[6px]" w={17} h={17} />
             GitHub
           </a>
+          <ThemeButton />
         </div>
       </div>
     </header>

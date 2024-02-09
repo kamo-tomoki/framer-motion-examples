@@ -1,10 +1,12 @@
-const CopyIcon: React.FC = () => {
+import { IconProps } from "./IconProps";
+
+const CopyIcon: React.FC<IconProps> = ({ w, h }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
-      width={20}
-      height={20}
+      width={w || 20}
+      height={h || 20}
     >
       <rect
         x="128"

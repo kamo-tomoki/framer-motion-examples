@@ -50,8 +50,7 @@ export function useWheelScroll(
   y: MotionValue<number>,
   constraints: Constraints | null,
   onWheelCallback: (e: WheelEvent) => void,
-  isActive: boolean,
-  setSlow: Dispatch<SetStateAction<boolean>>
+  isActive: boolean
 ) {
   const onWheel = (event: Event) => {
     if (!isActive) return;
@@ -61,7 +60,6 @@ export function useWheelScroll(
     const currentY = y.get();
     let newY = currentY - e.deltaY;
     let startedAnimation = false;
-    setSlow(false);
     const isWithinBounds =
       constraints && newY >= constraints.top && newY <= constraints.bottom;
 
@@ -69,7 +67,6 @@ export function useWheelScroll(
       newY = mix(currentY, newY, elasticFactor);
 
       if (newY < constraints.top) {
-        setSlow(true);
         if (e.deltaY <= deltaThreshold) {
           springTo(y, newY, constraints.top);
           startedAnimation = true;
@@ -79,7 +76,6 @@ export function useWheelScroll(
       }
 
       if (newY > constraints.bottom) {
-        setSlow(true);
         if (e.deltaY >= -deltaThreshold) {
           springTo(y, newY, constraints.bottom);
           startedAnimation = true;

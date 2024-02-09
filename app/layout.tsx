@@ -3,6 +3,11 @@ import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import GoogleAdsense from "./GoogleAdsense";
+import Providers from "./Providers";
+import Header from "./Header";
+import Footer from "./Footer";
+
+export const runtime = "edge";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +26,13 @@ export default function RootLayout({
       <head>
         <GoogleAdsense pId="4436108648632802" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} dark`}>
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
+      </body>
       <GoogleAnalytics gaId="G-1GELWPGE7D" />
     </html>
   );

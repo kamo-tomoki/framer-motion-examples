@@ -1,9 +1,11 @@
-const CloseIcon: React.FC = () => {
+import { IconProps } from "./IconProps";
+
+const CloseIcon: React.FC<IconProps> = ({ w, h }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="16"
-      width="16"
+      height={h || "16"}
+      width={w || "16"}
       viewBox="0 0 20 20"
     >
       <path

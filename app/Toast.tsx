@@ -1,12 +1,10 @@
-import { memo } from "react";
+import { ToastContext } from "@/contexts/ToastContext";
 import { AnimatePresence, motion } from "framer-motion";
-
-type Props = {
-  toast: string | null;
-};
+import { useContext } from "react";
 
 // eslint-disable-next-line react/display-name
-const Toast = memo(({ toast }: Props) => {
+const Toast: React.FC = () => {
+  const { toast } = useContext(ToastContext);
   return (
     <AnimatePresence>
       {toast && (
@@ -26,6 +24,6 @@ const Toast = memo(({ toast }: Props) => {
       )}
     </AnimatePresence>
   );
-});
+};
 
 export default Toast;
