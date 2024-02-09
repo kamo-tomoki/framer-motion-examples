@@ -1,4 +1,4 @@
-import Samples from "./Samples";
+import Samples from "../components";
 
 export default function Home() {
   return (
