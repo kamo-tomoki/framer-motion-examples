@@ -45,8 +45,8 @@ const PrivacyPolicy: React.FC = () => {
       <p className="text-[18px] mb-8">
         This site uses Google Adsense, an advertising service distributed by a
         third party, and uses cookies to display advertisements for products and
-        services according to the user's interests (hereinafter referred to as
-        personalized advertisements).
+        services according to the user&apos;s interests (hereinafter referred to
+        as personalized advertisements).
         <br />
         Cookies allow this site to identify your computer, but they do not allow
         us to identify you personally.
