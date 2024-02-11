@@ -1,10 +1,16 @@
-# Framer Motion Samples
-🚨 This is **not** an Official Framer Motion Project.
+# Framer Motion Examples
+🚨 This is an ***unofficial repository***.
 
-If you want to see the document, check [official website](https://www.framer.com/motion/).
+If you want to see the document, check [the official website](https://www.framer.com/motion/).
 
-## What is Framer Motion Samples?
-Framer Motion Samples is an open-source website that introduce animated components and codes.
+## What is Framer Motion Examples?
+Framer Motion Examples is an open-source website that introduce animated components and codes using Framer Motion.
+
+## Introduced Components
+1. SelectBox
+2. AppStore Card
+3. Dynamic Island Style
+4. Modal with Blurred Background
 
 ## Run in the local environment
 
