@@ -32,6 +32,7 @@ header {
 header h1 {
   font-size: 24px;
   font-weight: bold;
+  cursor: grab;
 }
 
 .header-container {
