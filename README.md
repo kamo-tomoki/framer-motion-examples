@@ -1,5 +1,7 @@
 # Framer Motion Examples
-🚨 This is an ***unofficial repository***.
+[framer-motion.site](https://framer-motion.site/)
+
+🚨 This is an ***unofficial website***.
 
 If you want to see the document, check [the official website](https://www.framer.com/motion/).
 
