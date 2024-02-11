@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 const CodeHeader = dynamic(() => import("./Card/CodeHeader"), { ssr: false });
 const Toast = dynamic(() => import("./Toast"), { ssr: false });
 
-const Samples = () => {
+const Examples = () => {
   const [stickyCodeHeader, setStickyCodeHeader] = useState(false);
   const sm = useContext(MediaContext);
   const { selectedCard } = useContext(CardContext);
@@ -51,4 +51,4 @@ const Samples = () => {
   );
 };
 
-export default Samples;
+export default Examples;
